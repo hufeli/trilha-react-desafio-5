@@ -20,16 +20,17 @@ const components = {
 };
 
 export default function PostPage({
-  posts,
   globalData,
+  posts,
 }) {
   return (
     <Layout>
       <SEO
-        title={`${posts.title} - ${globalData.name}`}
-        description={posts.description}
+        title={`${posts?.title} - ${globalData.name}`}
+        description={posts?.description}
       />
       <Header name={globalData.name} />
+      
       <article className="px-6 md:px-0">
         <header>
           <h1 className="text-3xl md:text-5xl dark:text-white text-center mb-12">
@@ -41,7 +42,7 @@ export default function PostPage({
         </header>
         <main>
           <article className="prose dark:prose-dark">
-            {posts.body}
+            {posts?.body}
           </article>
         </main>
       </article>
@@ -61,7 +62,6 @@ export default function PostPage({
 export const getServerSideProps = async ({ params }) => {
   const globalData = getGlobalData();
   const posts = await getPostBySlug(params.id);
- 
 
   return {
     props: {
